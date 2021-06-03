@@ -86,7 +86,7 @@ function Start-SpeedTest
      
             try {
                 Write-Verbose "Testing ping to $server"
-                $test = (Test-Connection -ComputerName $server -Count 4 -ErrorAction Stop | measure-Object -Property ResponseTime -Average).average 
+                $test = (Test-Connection -ComputerName $server -Count 4 -ErrorAction Stop | measure-Object -Property Latency -Average).average 
                 $response = ($test -as [decimal] ) 
             }   
             catch [System.Net.NetworkInformation.PingException] {
