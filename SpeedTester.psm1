@@ -83,17 +83,17 @@ function Start-SpeedTest
         )
         
         if ($PSVersionTable.PSVersion.major -gt 5) {
-            $LatencyParam = 'Latency'
+            $latencyParam = 'Latency'
         } 
         else {
-            $LatencyParam = 'ResponseTime'
+            $latencyParam = 'ResponseTime'
         }
         
         foreach ($server in $servers) { 
      
             try {
                 Write-Verbose "Testing ping to $server"
-                $test = (Test-Connection -ComputerName $server -Count 4 -ErrorAction Stop | measure-Object -Property $LatencyParam -Average).average 
+                $test = (Test-Connection -ComputerName $server -Count 4 -ErrorAction Stop | measure-Object -Property $latencyParam -Average).average 
                 $response = ($test -as [decimal] ) 
             }   
             catch [System.Net.NetworkInformation.PingException] {
